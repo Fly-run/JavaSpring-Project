@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stewie.mall.mapper.ProductMapper">
+
+    <!-- resultType 直接用实体类,配合 type-aliases-package 可省略包名 -->
+    <select id="findAll" resultType="Product">
+        SELECT id, name, price, stock, description, created_at
+        FROM product
+        ORDER BY id
+    </select>
+
+    <select id="findById" resultType="Product">
+        SELECT id, name, price, stock, description, created_at
+        FROM product
+        WHERE id = #{id}
+    </select>
+
+    <!-- useGeneratedKeys 回填自增主键 -->
+    <insert id="insert" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product (name, price, stock, description)
+        VALUES (#{name}, #{price}, #{stock}, #{description})
+    </insert>
+
+</mapper>

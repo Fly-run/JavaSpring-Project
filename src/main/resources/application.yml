@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: mall
+  datasource:
+    url: jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: '562813Li.'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.stewie.mall.entity
+  configuration:
+    # 下划线命名 -> 驼峰命名(created_at -> createdAt)
+    map-underscore-to-camel-case: true
+    # 打印 SQL 到控制台,方便学习观察
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 8080

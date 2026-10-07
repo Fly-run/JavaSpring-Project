@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stewie.mall.mapper.UserMapper">
+
+    <select id="findByUsername" resultType="User">
+        SELECT id, username, password, nickname, created_at
+        FROM users
+        WHERE username = #{username}
+    </select>
+
+    <select id="findById" resultType="User">
+        SELECT id, username, password, nickname, created_at
+        FROM users
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users (username, password, nickname)
+        VALUES (#{username}, #{password}, #{nickname})
+    </insert>
+
+</mapper>
