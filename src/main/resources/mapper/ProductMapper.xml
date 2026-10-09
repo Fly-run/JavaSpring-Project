@@ -21,4 +21,19 @@
         VALUES (#{name}, #{price}, #{stock}, #{description})
     </insert>
 
+    <!-- FOR UPDATE:对商品行加悲观锁,下单时防止并发超卖 -->
+    <select id="findForUpdate" resultType="Product">
+        SELECT id, name, price, stock, description, created_at
+        FROM product
+        WHERE id = #{id}
+        FOR UPDATE
+    </select>
+
+    <!-- 带 stock >= quantity 条件的原子扣减,返回 0 表示库存不足 -->
+    <update id="deductStock">
+        UPDATE product
+        SET stock = stock - #{quantity}
+        WHERE id = #{id} AND stock >= #{quantity}
+    </update>
+
 </mapper>

@@ -1,12 +1,11 @@
 package com.stewie.mall.controller;
 
+import com.stewie.mall.common.PageResult;
 import com.stewie.mall.common.Result;
 import com.stewie.mall.entity.Product;
 import com.stewie.mall.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * 商品接口层。RESTful 风格,统一返回 Result。
@@ -21,10 +20,16 @@ public class ProductController {
         this.productService = productService;
     }
 
-    /** GET /api/products 查询全部商品 */
+    /** GET /api/products?page=1&size=10 分页查询商品 */
     @GetMapping
-    public Result<List<Product>> list() {
-        return Result.success(productService.listAll());
+    public Result<PageResult<Product>> list(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        // 限制单页上限,防止一次拉全表
+        if (size > 100) {
+            size = 100;
+        }
+        return Result.success(productService.listPage(page, size));
     }
 
     /** GET /api/products/{id} 按 id 查询单个商品 */

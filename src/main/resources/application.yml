@@ -4,8 +4,18 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: '562813Li.'
+    password: '562813Li'
     driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 3000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -15,6 +25,11 @@ mybatis:
     map-underscore-to-camel-case: true
     # 打印 SQL 到控制台,方便学习观察
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# PageHelper 分页插件配置
+pagehelper:
+  helper-dialect: mysql          # 数据库方言(也可自动识别,显式指定更稳)
+  reasonable: true               # pageNum<1 或 >总页数时自动修正为边界页
 
 server:
   port: 8080

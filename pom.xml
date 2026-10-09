@@ -35,6 +35,13 @@
             <version>3.0.4</version>
         </dependency>
 
+        <!-- PageHelper 分页插件:MyBatis 分页事实标准,2.1.1 对应 Spring Boot 3.x + mybatis-spring-boot 3.0.x -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
         <!-- MySQL 驱动 -->
         <dependency>
             <groupId>com.mysql</groupId>
@@ -85,6 +92,12 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
+        <!-- Redis 缓存:Spring Data Redis,底层默认用 Lettuce 连接池 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
 
